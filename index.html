@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css"  href="assets/css/reset.css"></link>
+    <link rel="stylesheet" type="text/css"  href="assets/css/style.css"></link>
+    <title>Psychic</title>
+</head>
+<body>
+    <script>
+            var chars = "abcdefghijklmnopqrstuvwxyz";
+            var cpun = Math.floor(Math.random() * chars.length);
+            var cpug = chars[cpun];
+            console.log(cpug);
+
+            var wins = 0;
+            var losses = 0;
+            var guessLeft = 10;
+            var guessFar = 0;
+            var guessLog = [];
+
+            document.onkeyup = function(event){
+            var plyg = event.key;
+            console.log(plyg);
+            if (plyg === cpug){
+                alert("You Win!");
+                wins = wins + 1;
+                guessLeft = 10;
+                guessFar = 0;
+                guessLog = [];
+                console.log(wins);
+                document.getElementById("winsNum").innerHTML = wins;
+                chars = "abcdefghijklmnopqrstuvwxyz";
+                cpun = Math.floor(Math.random() * chars.length);
+                cpug = chars[cpun];
+                console.log(cpug)
+            } else {
+                guessLeft = guessLeft - 1;
+                console.log(guessLeft);
+                document.getElementById("guessLeftNum").innerHTML = guessLeft;
+                guessFar = guessFar +1;
+                console.log(guessFar);
+                guessLog.push(plyg);
+                console.log(guessLog);
+                document.getElementById("guessLogArr").innerHTML = guessLog;
+            }
+            if (guessFar === 10){
+                alert("You Lose!");
+                losses = losses + 1;
+                console.log(losses);
+                document.getElementById("lossesNum").innerHTML = losses;
+                guessLeft = 10;
+                document.getElementById("guessLeftNum").innerHTML = guessLeft;
+                guessFar = 0;
+                guessLog = [];
+                document.getElementById("guessLogArr").innerHTML = guessLog;
+                chars = "abcdefghijklmnopqrstuvwxyz";
+                cpun = Math.floor(Math.random() * chars.length);
+                cpug = chars[cpun];
+                console.log(cpug)
+            }
+            }
+
+
+
+    </script>
+
+    <h1> The Psychic Game</h1>
+    <p>Guess what letter I'm thinking of</p>
+    <p>Wins: <span id="winsNum"></span></p>
+    <p>Losses:<span id="lossesNum"></span></p>
+    <p>Guesses Left:<span id="guessLeftNum"></span></p>
+    <p>Guesses So Far:<span id="guessLogArr"></span></p>
+</body>
+</html>
